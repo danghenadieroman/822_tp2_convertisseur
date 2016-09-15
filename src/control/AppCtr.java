@@ -14,9 +14,10 @@ public class AppCtr {
      */
     public static void main(String[] args) {
 
-        Locale local = Locale.getDefault();
-        Locale.setDefault(new Locale("fr", ""));
-        FenConvertisseur fenetre = new FenConvertisseur(local);
+//        Locale local = Locale.getDefault();
+//        Locale.setDefault(new Locale("fr", ""));
+        
+        FenConvertisseur fenetre = new FenConvertisseur();
     }
 
 }

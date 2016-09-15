@@ -38,13 +38,13 @@ public class FenConvertisseur {
     private JPanel jpFormulaire;
     private JPanel jpBoutons;
 
-    private ResourceBundle bundle;
+    private ResourceBundle bundleI18n;
     JComboBox<String> comboBoxMonnaieSource = new JComboBox<String>();
     JComboBox<String> comboBoxMonnaieSible = new JComboBox<String>();
 
-    public FenConvertisseur(Locale locale) {
+    public FenConvertisseur() {
 
-        bundle = ResourceBundle.getBundle("Internationalisation", locale);
+        bundleI18n = ResourceBundle.getBundle("Internationalisation");
 
         fenetre = new JFrame();
 
@@ -54,7 +54,7 @@ public class FenConvertisseur {
         fenetre.add(jpPrincipal);
 
         //creation titre formulaire (NORTH)
-        lblTitre = new JLabel(bundle.getString("PTitre"));
+        lblTitre = new JLabel(bundleI18n.getString("PTitre"));
         jpPrincipal.add(lblTitre, BorderLayout.NORTH);
 
         //creation paneau formulaire (CENTRE)
@@ -78,13 +78,13 @@ public class FenConvertisseur {
         //creation paneau Bouttons (SOUTH)
         jpBoutons = new JPanel();
         jpPrincipal.add(jpBoutons, BorderLayout.SOUTH);
-        btnCalculer = new JButton(bundle.getString("PbtnCalculer"));
+        btnCalculer = new JButton(bundleI18n.getString("PbtnCalculer"));
         jpBoutons.add(btnCalculer);
-        btnFermer = new JButton(bundle.getString("PbtnFermer"));
+        btnFermer = new JButton(bundleI18n.getString("PbtnFermer"));
         jpBoutons.add(btnFermer);
 
         //option fenetre
-        fenetre.setTitle(bundle.getString("PTitreFenetre"));
+        fenetre.setTitle(bundleI18n.getString("PTitreFenetre"));
         fenetre.setDefaultCloseOperation(EXIT_ON_CLOSE);
         fenetre.setResizable(true);
         fenetre.setSize(500, 200);
@@ -117,14 +117,14 @@ public class FenConvertisseur {
     }
 
     private void comboBoxMonnaieSource() {
-        comboBoxMonnaieSource.addItem(bundle.getString("PCAD"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PUSD"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PEuro"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PGBP"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PJPY"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PMDL"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PRON"));
-        comboBoxMonnaieSource.addItem(bundle.getString("PRUB"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PCAD"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PUSD"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PEuro"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PGBP"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PJPY"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PMDL"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PRON"));
+        comboBoxMonnaieSource.addItem(bundleI18n.getString("PRUB"));
 
         comboBoxMonnaieSource.addActionListener(new ActionListener() {
             @Override
@@ -137,14 +137,14 @@ public class FenConvertisseur {
     }
 
     private void comboBoxMonnaieSible() {
-        comboBoxMonnaieSible.addItem(bundle.getString("PCAD"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PUSD"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PEuro"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PGBP"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PJPY"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PMDL"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PRON"));
-        comboBoxMonnaieSible.addItem(bundle.getString("PRUB"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PCAD"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PUSD"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PEuro"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PGBP"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PJPY"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PMDL"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PRON"));
+        comboBoxMonnaieSible.addItem(bundleI18n.getString("PRUB"));
 
         comboBoxMonnaieSible.addActionListener(new ActionListener() {
             @Override
@@ -156,24 +156,26 @@ public class FenConvertisseur {
 
     private double getTauxDeChange() {
 
+        ResourceBundle bundleCurrencyRate = ResourceBundle.getBundle("CurrencyRate");
         double tauxDeChange = 0;
+        
         switch (comboBoxMonnaieSource.getSelectedIndex()) {
             case 0: //CAD to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
                     case 0:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoCAD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PCADtoCAD"));
                         break;
                     case 1:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoUSD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PCADtoUSD"));
                         break;
                     case 2:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoEUR"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PCADtoEUR"));
                         break;
                     case 3:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoBGP"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PCADtoBGP"));
                         break;
                     case 4:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoJPY"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PCADtoJPY"));
                         break;
                 }//switch
 
@@ -182,19 +184,19 @@ public class FenConvertisseur {
             case 1: // USD to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
                     case 0:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoCAD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PUSDtoCAD"));
                         break;
                     case 1:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoUSD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PUSDtoUSD"));
                         break;
                     case 2:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoEUR"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PUSDtoEUR"));
                         break;
                     case 3:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoBGP"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PUSDtoBGP"));
                         break;
                     case 4:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoJPY"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PUSDtoJPY"));
                         break;
                 }//switch
 
@@ -203,19 +205,19 @@ public class FenConvertisseur {
             case 2: // EUR to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
                     case 0:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoCAD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PEURtoCAD"));
                         break;
                     case 1:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoUSD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PEURtoUSD"));
                         break;
                     case 2:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoEUR"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PEURtoEUR"));
                         break;
                     case 3:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoBGP"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PEURtoBGP"));
                         break;
                     case 4:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoJPY"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PEURtoJPY"));
                         break;
                 }//switch
 
@@ -224,45 +226,46 @@ public class FenConvertisseur {
             case 3: // BGP to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
                     case 0:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoCAD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PBGPtoCAD"));
                         break;
                     case 1:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoUSD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PBGPtoUSD"));
                         break;
                     case 2:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoEUR"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PBGPtoEUR"));
                         break;
                     case 3:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoBGP"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PBGPtoBGP"));
                         break;
                     case 4:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoJPY"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PBGPtoJPY"));
                         break;
                 }//switch
                 
                 break;//case: 3 BGP to ...
                 
             case 4: // JPY to ...
+                //ici on a le resultat < 0.01 . 
+                //il faut gerer ce cas, parce que il n<existe pas monnais plus petit que 1
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
                     case 0:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoCAD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PJPYtoCAD"));
                         tauxDeChange = tauxDeChange / 100;
                         break;
                     case 1:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoUSD"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PJPYtoUSD"));
                         tauxDeChange = tauxDeChange / 100;
                         break;
                     case 2:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoEUR"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PJPYtoEUR"));
                         tauxDeChange = tauxDeChange / 100;
                         break;
                     case 3:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoBGP"));
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PJPYtoBGP"));
                         tauxDeChange = tauxDeChange / 100;
                         break;
                     case 4:
-                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoJPY"));
-                        tauxDeChange = tauxDeChange / 100;
+                        tauxDeChange = Double.parseDouble(bundleCurrencyRate.getString("PJPYtoJPY"));
                         break;
                 }//switch
 
