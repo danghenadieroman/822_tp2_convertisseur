@@ -66,7 +66,7 @@ public class FenConvertisseur {
         jpFormulaire.add(txtMonnaieSource);
         txtMonnaieSible = new JTextField(20);
         txtMonnaieSible.setText("1");
-        txtMonnaieSible.setEnabled(false);
+        txtMonnaieSible.setEnabled(true);
         jpFormulaire.add(txtMonnaieSible);
 
         comboBoxMonnaieSource();
