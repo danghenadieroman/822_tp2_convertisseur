@@ -78,7 +78,7 @@ public class FenConvertisseur {
         //creation paneau Bouttons (SOUTH)
         jpBoutons = new JPanel();
         jpPrincipal.add(jpBoutons, BorderLayout.SOUTH);
-        btnCalculer = new JButton(bundle.getString("PbtnClaculer"));
+        btnCalculer = new JButton(bundle.getString("PbtnCalculer"));
         jpBoutons.add(btnCalculer);
         btnFermer = new JButton(bundle.getString("PbtnFermer"));
         jpBoutons.add(btnFermer);
@@ -102,7 +102,7 @@ public class FenConvertisseur {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //j'ai mit convertir() dans comboBox aussi, pour faire marcher le calcule dans le cas de changement monnaie
-                convertir();
+                calculer();
             }
         });
     }
@@ -129,7 +129,8 @@ public class FenConvertisseur {
         comboBoxMonnaieSource.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                convertir();
+                calculer();
+
             }
         });
 
@@ -148,23 +149,132 @@ public class FenConvertisseur {
         comboBoxMonnaieSible.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                convertir();
+                calculer();
             }
         });
     }
 
-    private int getTauxDeChange() {
+    private double getTauxDeChange() {
 
-        //à faire
-        //ici on determine les monnaies choisi et on calcule le taux d'echange
-        // on return le taux
-        return 2;
+        double tauxDeChange = 0;
+        switch (comboBoxMonnaieSource.getSelectedIndex()) {
+            case 0: //CAD to ...
+                switch (comboBoxMonnaieSible.getSelectedIndex()) {
+                    case 0:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoCAD"));
+                        break;
+                    case 1:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoUSD"));
+                        break;
+                    case 2:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoEUR"));
+                        break;
+                    case 3:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoBGP"));
+                        break;
+                    case 4:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PCADtoJPY"));
+                        break;
+                }//switch
+
+                break; //case: 0 CAD to ...
+                
+            case 1: // USD to ...
+                switch (comboBoxMonnaieSible.getSelectedIndex()) {
+                    case 0:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoCAD"));
+                        break;
+                    case 1:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoUSD"));
+                        break;
+                    case 2:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoEUR"));
+                        break;
+                    case 3:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoBGP"));
+                        break;
+                    case 4:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PUSDtoJPY"));
+                        break;
+                }//switch
+
+                break;//case: 1 USD to ...
+                
+            case 2: // EUR to ...
+                switch (comboBoxMonnaieSible.getSelectedIndex()) {
+                    case 0:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoCAD"));
+                        break;
+                    case 1:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoUSD"));
+                        break;
+                    case 2:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoEUR"));
+                        break;
+                    case 3:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoBGP"));
+                        break;
+                    case 4:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PEURtoJPY"));
+                        break;
+                }//switch
+
+                break;//case: 2 EUR to ...
+                
+            case 3: // BGP to ...
+                switch (comboBoxMonnaieSible.getSelectedIndex()) {
+                    case 0:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoCAD"));
+                        break;
+                    case 1:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoUSD"));
+                        break;
+                    case 2:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoEUR"));
+                        break;
+                    case 3:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoBGP"));
+                        break;
+                    case 4:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PBGPtoJPY"));
+                        break;
+                }//switch
+                
+                break;//case: 3 BGP to ...
+                
+            case 4: // JPY to ...
+                switch (comboBoxMonnaieSible.getSelectedIndex()) {
+                    case 0:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoCAD"));
+                        tauxDeChange = tauxDeChange / 100;
+                        break;
+                    case 1:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoUSD"));
+                        tauxDeChange = tauxDeChange / 100;
+                        break;
+                    case 2:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoEUR"));
+                        tauxDeChange = tauxDeChange / 100;
+                        break;
+                    case 3:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoBGP"));
+                        tauxDeChange = tauxDeChange / 100;
+                        break;
+                    case 4:
+                        tauxDeChange = Double.parseDouble(bundle.getString("PJPYtoJPY"));
+                        tauxDeChange = tauxDeChange / 100;
+                        break;
+                }//switch
+
+                break;//case: 4 JPY to ...
+        }
+        return tauxDeChange;
     }
 
-    private void convertir() {
+    private void calculer() {
         try {
             int source = Integer.parseInt(txtMonnaieSource.getText().trim());
-            int sible = source * getTauxDeChange();
+            double sible = source * getTauxDeChange();
             txtMonnaieSible.setText(sible + "");
 
         } catch (Exception e) {
