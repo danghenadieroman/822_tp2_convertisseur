@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Dan-Ghendie Roman
+ * @author Dan-Ghenadie Roman
  */
 public class FenConvertisseur {
 
@@ -130,7 +130,6 @@ public class FenConvertisseur {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 calculer();
-
             }
         });
 
@@ -179,7 +178,7 @@ public class FenConvertisseur {
                         break;
                 }//switch
 
-                break; //case: 0 CAD to ...
+                break; //case: 0; CAD to ...
                 
             case 1: // USD to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
@@ -200,7 +199,7 @@ public class FenConvertisseur {
                         break;
                 }//switch
 
-                break;//case: 1 USD to ...
+                break;//case: 1; USD to ...
                 
             case 2: // EUR to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
@@ -221,7 +220,7 @@ public class FenConvertisseur {
                         break;
                 }//switch
 
-                break;//case: 2 EUR to ...
+                break;//case: 2; EUR to ...
                 
             case 3: // BGP to ...
                 switch (comboBoxMonnaieSible.getSelectedIndex()) {
@@ -242,7 +241,7 @@ public class FenConvertisseur {
                         break;
                 }//switch
                 
-                break;//case: 3 BGP to ...
+                break;//case: 3; BGP to ...
                 
             case 4: // JPY to ...
                 //ici on a le resultat < 0.01 . 
@@ -269,7 +268,7 @@ public class FenConvertisseur {
                         break;
                 }//switch
 
-                break;//case: 4 JPY to ...
+                break;//case: 4; JPY to ...
         }
         return tauxDeChange;
     }
@@ -281,7 +280,7 @@ public class FenConvertisseur {
             txtMonnaieSible.setText(sible + "");
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "SVP en numérique seulment",
+            JOptionPane.showMessageDialog(null, "SVP entier seulment",
                     "Echec formulaire", JOptionPane.ERROR_MESSAGE);
             txtMonnaieSource.setText("");
         }
